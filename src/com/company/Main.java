@@ -12,14 +12,14 @@ public class Main {
 
         String txtfile = args[0];
         File file = new File(txtfile);
-        checkforsupport(file);
-        checkforexistance(file);
+        checkForSupport(file);
+        checkForExistance(file);
         String searchword = args[1];
         System.out.println("processing................");
         String data = null;
         data = readFileAsString(txtfile);
-        avoidspecialchar(data);
-        searchtheword(data,searchword);
+        avoidSpecialChar(data);
+        searchTheWord(data,searchword);
 
 
     }
@@ -36,7 +36,7 @@ public class Main {
               return data;
     }
 
-        public static void checkforsupport(File file)
+        public static void checkForSupport(File file)
         {
 
             if (file.getName().endsWith(".txt")) {
@@ -50,7 +50,7 @@ public class Main {
                 }
         }
 
-        public static void checkforexistance(File file) {
+        public static void checkForExistance(File file) {
             if (file.exists()) {
 
                 System.out.println("file exists");
@@ -59,7 +59,7 @@ public class Main {
                 System.out.println("file doesn't found ");
             }
         }
-        public static void avoidspecialchar(String data)
+        public static void avoidSpecialChar(String data)
         {
             data = data.replaceAll("[^a-zA-Z0-9@]", " ");
         }
