@@ -8,18 +8,40 @@ import java.lang.String;
 
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-        String txtfile = args[0];
-        File file = new File(txtfile);
-        checkForSupport(file);
-        checkForExistance(file);
-        String searchword = args[1];
+        String txtFilePath = args[0];
+
+        File file = new File(txtFilePath);
+        if(file.length()==0)
+        {
+            System.out.println("Enter the valid path ");
+            System.exit(0);
+        }
+        isFileFormatSupported(file);
+        isFileExists(file);
+
+        if((isFileExists(file) && isFileFormatSupported(file))== false)
+        {
+            System.out.println("file is not valid");
+            System.exit(0);
+        }
+
+
         System.out.println("processing................");
-        String data = null;
-        data = readFileAsString(txtfile);
-        avoidSpecialChar(data);
-        searchTheWord(data,searchword);
+
+        String data = readFileAsString(txtFilePath);
+
+
+        String searchword = null;
+        try {
+            searchword = args[1];
+        } catch (Exception e) {
+            System.out.println("search word has not entered");
+            System.exit(1);
+        }
+
+        searchTheWord(data, searchword);
 
 
     }
@@ -33,44 +55,34 @@ public class Main {
               } catch (IOException e) {
                   e.printStackTrace();
               }
-              return data;
+              return data.replaceAll("[^a-zA-Z0-9@]", " ");
+
     }
 
-        public static void checkForSupport(File file)
+        public static boolean isFileFormatSupported(File file)
         {
-
-            if (file.getName().endsWith(".txt")) {
-                System.out.println("file supported");
-
-            }
-
-            else
-                {
-                    System.out.println("file not supported");
-                }
+            return (file.getName().endsWith(".txt"));
         }
 
-        public static void checkForExistance(File file) {
-            if (file.exists()) {
+        public static boolean isFileExists(File file) {
+           return file.exists();
+        }
 
-                System.out.println("file exists");
-            }
-            else {
-                System.out.println("file doesn't found ");
-            }
-        }
-        public static void avoidSpecialChar(String data)
-        {
-            data = data.replaceAll("[^a-zA-Z0-9@]", " ");
-        }
             public static void searchTheWord(String data,String searchword) {
                 StringTokenizer st = new StringTokenizer(data);
                 int count = 0;
+                if(st.hasMoreElements()==false)
+                {
+                    System.out.println("file is empty");
+                    System.exit(0);
+                }
                 while (st.hasMoreTokens())
                 {
-                    if (searchword.equalsIgnoreCase(st.nextToken())) {
-                        count++;
-                    }
+
+                        if (searchword.equalsIgnoreCase(st.nextToken())) {
+                            count++;
+                        }
+
                 }
 
                 if (count == 0) {
