@@ -59,10 +59,11 @@ public class Main {
                 System.out.println("file doesn't found ");
             }
         }
-        public static void avoidspecialchar(String data) {
+        public static void avoidspecialchar(String data)
+        {
             data = data.replaceAll("[^a-zA-Z0-9@]", " ");
         }
-            public static void searchtheword(String data,String searchword) {
+            public static void searchTheWord(String data,String searchword) {
                 StringTokenizer st = new StringTokenizer(data);
                 int count = 0;
                 while (st.hasMoreTokens())
