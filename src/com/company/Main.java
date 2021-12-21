@@ -10,8 +10,7 @@ import java.lang.String;
 public class Main {
     public static void main(String[] args) {
 
-        if(args.length!=2)
-        {
+        if(args.length!=2) {
             System.out.println("Please enter the valid path and word");
             return;
         }
@@ -41,17 +40,11 @@ public class Main {
                   e.printStackTrace();
               }
               return data.replaceAll("[^a-zA-Z0-9@]", " ");
-
     }
-
-        public static boolean isFileFormatSupported(File file)
-        {
+        public static boolean isFileFormatSupported(File file) {
            return (file.getName().endsWith(".txt"));
         }
-
-
-
-            public static void searchTheWord(String data,String searchword) {
+        public static void searchTheWord(String data,String searchword) {
                 StringTokenizer st = new StringTokenizer(data);
                 int count = 0;
 
