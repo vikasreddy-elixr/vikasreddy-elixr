@@ -10,20 +10,29 @@ import java.lang.String;
 public class Main {
     public static void main(String[] args) {
 
-        String txtFilePath = args[0];
+
+        String txtFilePath = null;
+        try {
+            txtFilePath = args[0];
+        } catch (Exception e) {
+            System.out.println("Path has not entered");
+            System.exit(1);
+        }
+
 
         File file = new File(txtFilePath);
-        if(file.length()==0)
-        {
-            System.out.println("Enter the valid path ");
-            System.exit(0);
-        }
+
         isFileFormatSupported(file);
         isFileExists(file);
 
-        if((isFileExists(file) && isFileFormatSupported(file))== false)
+        if(!isFileExists(file) || !isFileFormatSupported(file))
         {
             System.out.println("file is not valid");
+            System.exit(0);
+        }
+        if(file.length()==0)
+        {
+            System.out.println("Enter the valid path ");
             System.exit(0);
         }
 
@@ -61,7 +70,7 @@ public class Main {
 
         public static boolean isFileFormatSupported(File file)
         {
-            return (file.getName().endsWith(".txt"));
+           return (file.getName().endsWith(".txt"));
         }
 
         public static boolean isFileExists(File file) {
