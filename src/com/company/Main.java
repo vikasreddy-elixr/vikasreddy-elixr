@@ -15,26 +15,25 @@ public class Main {
         try {
             txtFilePath = args[0];
         } catch (Exception e) {
-            System.out.println("Path has not entered");
-            System.exit(1);
+            System.out.println("Path was not entered");
+            return ;
         }
 
 
         File file = new File(txtFilePath);
 
         isFileFormatSupported(file);
-        isFileExists(file);
 
-        if(!isFileExists(file) || !isFileFormatSupported(file))
-        {
-            System.out.println("file is not valid");
-            System.exit(0);
-        }
-        if(file.length()==0)
-        {
+        if(file.length() == 0) {
             System.out.println("Enter the valid path ");
-            System.exit(0);
+            return ;
         }
+
+        if(!file.exists() || !isFileFormatSupported(file)) {
+            System.out.println("file is not valid");
+            return ;
+        }
+
 
 
         System.out.println("processing................");
@@ -46,7 +45,7 @@ public class Main {
         try {
             searchword = args[1];
         } catch (Exception e) {
-            System.out.println("search word has not entered");
+            System.out.println("word to search has not entered");
             System.exit(1);
         }
 
@@ -73,9 +72,7 @@ public class Main {
            return (file.getName().endsWith(".txt"));
         }
 
-        public static boolean isFileExists(File file) {
-           return file.exists();
-        }
+
 
             public static void searchTheWord(String data,String searchword) {
                 StringTokenizer st = new StringTokenizer(data);
@@ -83,7 +80,7 @@ public class Main {
                 if(st.hasMoreElements()==false)
                 {
                     System.out.println("file is empty");
-                    System.exit(0);
+                    return ;
                 }
                 while (st.hasMoreTokens())
                 {
