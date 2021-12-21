@@ -53,13 +53,10 @@ public class Main {
         int count = 0;
 
         while (st.hasMoreTokens()) {
-
             if (searchword.equalsIgnoreCase(st.nextToken())) {
                 count++;
             }
-
         }
-
         if (count == 0) {
             System.out.println("Word not found");
         } else {
@@ -67,11 +64,4 @@ public class Main {
             System.out.println("the word has been repeated for " + count + " times");
         }
     }
-
 }
-
-
-
-
-
-
