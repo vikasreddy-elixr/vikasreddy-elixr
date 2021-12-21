@@ -10,27 +10,24 @@ import java.lang.String;
 public class Main {
     public static void main(String[] args) {
 
-
-        String txtFilePath = null;
-        try {
-            txtFilePath = args[0];
-        } catch (Exception e) {
-            System.out.println("Path was not entered");
-            return ;
+        if(args.length!=2)
+        {
+            System.out.println("Please enter the valid path and word");
+            return;
         }
 
-
+        String txtFilePath = args[0];
+        String searchword = args[1];
         File file = new File(txtFilePath);
 
         isFileFormatSupported(file);
 
-        if(file.length() == 0) {
-            System.out.println("Enter the valid path ");
-            return ;
-        }
-
         if(!file.exists() || !isFileFormatSupported(file)) {
             System.out.println("file is not valid");
+            return ;
+        }
+        if(file.length() == 0) {
+            System.out.println("the file does not contains any data ");
             return ;
         }
 
@@ -41,17 +38,9 @@ public class Main {
         String data = readFileAsString(txtFilePath);
 
 
-        String searchword = null;
-        try {
-            searchword = args[1];
-        } catch (Exception e) {
-            System.out.println("word to search has not entered");
-            System.exit(1);
-        }
+
 
         searchTheWord(data, searchword);
-
-
     }
 
 
@@ -77,11 +66,7 @@ public class Main {
             public static void searchTheWord(String data,String searchword) {
                 StringTokenizer st = new StringTokenizer(data);
                 int count = 0;
-                if(st.hasMoreElements()==false)
-                {
-                    System.out.println("file is empty");
-                    return ;
-                }
+
                 while (st.hasMoreTokens())
                 {
 
