@@ -15,7 +15,6 @@ public class Main {
             System.out.println("Please enter the valid path and word");
             return;
         }
-
         String txtFilePath = args[0];
         String searchword = args[1];
         File file = new File(txtFilePath);
@@ -30,22 +29,11 @@ public class Main {
             System.out.println("the file does not contains any data ");
             return ;
         }
-
-
-
         System.out.println("processing................");
-
         String data = readFileAsString(txtFilePath);
-
-
-
-
         searchTheWord(data, searchword);
     }
-
-
-        public static String readFileAsString(String fileName)
-             {
+        public static String readFileAsString(String fileName) {
                 String data = "";
               try {
                    data = new String(Files.readAllBytes(Paths.get(fileName)));
