@@ -8,9 +8,9 @@ import java.lang.String;
 
 
 public class Main {
-    final static String extention=".txt";
-    final static String specialChars="[^a-zA-Z0-9@]";
-    final static String replacement=" ";
+    final static String FILE_TYPE=".txt";
+    final static String SPECIAL_CHAR_REMOVAL_REGEX="[^a-zA-Z0-9@]";
+    final static String SINGLE_SPACE=" ";
     public static void main(String[] args) {
 
         if (args.length != 2) {
@@ -41,11 +41,11 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return data.replaceAll(specialChars, replacement);
+        return data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
     }
 
     public static boolean isFileFormatSupported(File file) {
-        return (file.getName().endsWith(extention));
+        return (file.getName().endsWith(FILE_TYPE));
     }
 
     public static void searchTheWord(String data, String searchword) {
