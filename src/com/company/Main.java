@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.StringTokenizer;
-import java.lang.String;
 
 
 public class Main {
@@ -41,7 +40,10 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
+        if(data!=null) {
+            return data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
+        }
+        return data;
     }
 
     public static boolean isFileFormatSupported(File file) {
