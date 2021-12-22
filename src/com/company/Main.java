@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.StringTokenizer;
 
-
 public class Main {
     final static String FILE_TYPE_TXT = ".txt";
     final static String FILE_TYPE_JSON = ".json";
@@ -34,6 +33,7 @@ public class Main {
         System.out.println("Processing................");
         String data = readFileAsString(txtFilePath);
         if (data == null) {
+            System.out.println("Since no data is present in the file, Program is exciting");
             return;
         }
         searchTheWord(data, searchword);
