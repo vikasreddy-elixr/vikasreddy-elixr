@@ -19,7 +19,7 @@ public class Main {
             return;
         }
         String txtFilePath = args[0];
-        String searchword = args[1];
+        String searchWord = args[1];
         File file = new File(txtFilePath);
 
         if (!file.exists() || !isFileFormatSupported(file)) {
@@ -32,18 +32,23 @@ public class Main {
         }
         System.out.println("Processing................");
         String data = readFileAsString(txtFilePath);
-
-        searchTheWord(data, searchword);
+        if(data==null)
+        {
+            System.out.println("Couldn't read data from the file");
+            return;
+        }
+        searchTheWord(data, searchWord);
     }
 
     public static String readFileAsString(String fileName) {
         String data = null;
         try {
             data = new String(Files.readAllBytes(Paths.get(fileName)));
-            data=data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
-        } catch (IOException e) {
+            data = data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
         return data;
     }
 
