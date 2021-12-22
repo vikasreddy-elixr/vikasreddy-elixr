@@ -32,10 +32,7 @@ public class Main {
         }
         System.out.println("Processing................");
         String data = readFileAsString(txtFilePath);
-        if (data == null) {
-            System.out.println("Since no data is present in the file, Program is exciting");
-            return;
-        }
+
         searchTheWord(data, searchword);
     }
 
@@ -43,10 +40,11 @@ public class Main {
         String data = null;
         try {
             data = new String(Files.readAllBytes(Paths.get(fileName)));
+            data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
+        return data;
     }
 
     public static boolean isFileFormatSupported(File file) {
