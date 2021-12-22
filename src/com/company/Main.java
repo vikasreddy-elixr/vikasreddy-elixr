@@ -1,4 +1,5 @@
 package com.company;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,10 +8,11 @@ import java.util.StringTokenizer;
 
 
 public class Main {
-    final static String FILE_TYPE_1=".txt";
-    final static String FILE_TYPE_2=".jason";
-    final static String SPECIAL_CHAR_REMOVAL_REGEX="[^a-zA-Z0-9@]";
-    final static String SINGLE_SPACE=" ";
+    final static String FILE_TYPE_TXT = ".txt";
+    final static String FILE_TYPE_JSON = ".json";
+    final static String SPECIAL_CHAR_REMOVAL_REGEX = "[^a-zA-Z0-9@]";
+    final static String SINGLE_SPACE = " ";
+
     public static void main(String[] args) {
 
         if (args.length != 2) {
@@ -31,24 +33,24 @@ public class Main {
         }
         System.out.println("Processing................");
         String data = readFileAsString(txtFilePath);
+        if (data == null) {
+            return;
+        }
         searchTheWord(data, searchword);
     }
 
     public static String readFileAsString(String fileName) {
-        String data =null;
+        String data = null;
         try {
             data = new String(Files.readAllBytes(Paths.get(fileName)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(data!=null) {
-            return data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
-        }
-        return data;
+        return data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
     }
 
     public static boolean isFileFormatSupported(File file) {
-        return (file.getName().endsWith(FILE_TYPE_1) || file.getName().endsWith(FILE_TYPE_2));
+        return (file.getName().endsWith(FILE_TYPE_TXT) || file.getName().endsWith(FILE_TYPE_JSON));
     }
 
     public static void searchTheWord(String data, String searchword) {
