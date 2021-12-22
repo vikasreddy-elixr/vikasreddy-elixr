@@ -1,89 +1,75 @@
 package com.company;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.StringTokenizer;
-import java.lang.String;
-
 
 public class Main {
-    public static void main(String[] args){
+    final static String FILE_TYPE_TXT = ".txt";
+    final static String FILE_TYPE_JSON = ".json";
+    final static String SPECIAL_CHAR_REMOVAL_REGEX = "[^a-zA-Z0-9@]";
+    final static String SINGLE_SPACE = " ";
 
-        String txtfile = args[0];
-        File file = new File(txtfile);
-        checkforsupport(file);
-        checkforexistance(file);
-        String searchword = args[1];
-        System.out.println("processing................");
-        String data = null;
-        data = readFileAsString(txtfile);
-        avoidspecialchar(data);
-        searchtheword(data,searchword);
+    public static void main(String[] args) {
 
+        if (args.length != 2) {
+            System.out.println("Exiting, since no file path and word to search for are provided!");
+            return;
+        }
+        String txtFilePath = args[0];
+        String searchWord = args[1];
+        File file = new File(txtFilePath);
 
-    }
-
-
-        public static String readFileAsString(String fileName)
-             {
-                String data = "";
-              try {
-                   data = new String(Files.readAllBytes(Paths.get(fileName)));
-              } catch (IOException e) {
-                  e.printStackTrace();
-              }
-              return data;
-    }
-
-        public static void checkforsupport(File file)
+        if (!file.exists() || !isFileFormatSupported(file)) {
+            System.out.println("File is not valid");
+            return;
+        }
+        if (file.length() == 0) {
+            System.out.println("The file does not contains any data ");
+            return;
+        }
+        System.out.println("Processing................");
+        String data = readFileAsString(txtFilePath);
+        if(data==null)
         {
+            System.out.println("Couldn't read data from the file");
+            return;
+        }
+        searchTheWord(data, searchWord);
+    }
 
-            if (file.getName().endsWith(".txt")) {
-                System.out.println("file supported");
-
-            }
-
-            else
-                {
-                    System.out.println("file not supported");
-                }
+    public static String readFileAsString(String fileName) {
+        String data = null;
+        try {
+            data = new String(Files.readAllBytes(Paths.get(fileName)));
+            data = data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        public static void checkforexistance(File file) {
-            if (file.exists()) {
+        return data;
+    }
 
-                System.out.println("file exists");
-            }
-            else {
-                System.out.println("file doesn't found ");
+    public static boolean isFileFormatSupported(File file) {
+        return (file.getName().endsWith(FILE_TYPE_TXT) || file.getName().endsWith(FILE_TYPE_JSON));
+    }
+
+    public static void searchTheWord(String data, String searchword) {
+        StringTokenizer st = new StringTokenizer(data);
+        int count = 0;
+
+        while (st.hasMoreTokens()) {
+            if (searchword.equalsIgnoreCase(st.nextToken())) {
+                count++;
             }
         }
-        public static void avoidspecialchar(String data) {
-            data = data.replaceAll("[^a-zA-Z0-9@]", " ");
+        if (count == 0) {
+            System.out.println("Word not found");
+        } else {
+            System.out.println("The word has been found");
+            System.out.println("The word has been repeated for " + count + " times");
         }
-            public static void searchtheword(String data,String searchword) {
-                StringTokenizer st = new StringTokenizer(data);
-                int count = 0;
-                while (st.hasMoreTokens())
-                {
-                    if (searchword.equalsIgnoreCase(st.nextToken())) {
-                        count++;
-                    }
-                }
-
-                if (count == 0) {
-                    System.out.println("Word not found");
-                } else {
-                    System.out.println("The word has been found");
-                    System.out.println("the word has been repeated for " + count + " times");
-                }
-            }
-
-        }
-
-
-
-
-
-
+    }
+}
