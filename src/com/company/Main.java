@@ -40,7 +40,7 @@ public class Main {
         String data = null;
         try {
             data = new String(Files.readAllBytes(Paths.get(fileName)));
-            data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
+            data=data.replaceAll(SPECIAL_CHAR_REMOVAL_REGEX, SINGLE_SPACE);
         } catch (IOException e) {
             e.printStackTrace();
         }
