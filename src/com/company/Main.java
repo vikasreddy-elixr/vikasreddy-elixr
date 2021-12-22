@@ -7,7 +7,8 @@ import java.util.StringTokenizer;
 
 
 public class Main {
-    final static String FILE_TYPE=".txt";
+    final static String FILE_TYPE_1=".txt";
+    final static String FILE_TYPE_2=".jason";
     final static String SPECIAL_CHAR_REMOVAL_REGEX="[^a-zA-Z0-9@]";
     final static String SINGLE_SPACE=" ";
     public static void main(String[] args) {
@@ -47,7 +48,7 @@ public class Main {
     }
 
     public static boolean isFileFormatSupported(File file) {
-        return (file.getName().endsWith(FILE_TYPE));
+        return (file.getName().endsWith(FILE_TYPE_1) || file.getName().endsWith(FILE_TYPE_2));
     }
 
     public static void searchTheWord(String data, String searchword) {
