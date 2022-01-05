@@ -1,6 +1,5 @@
 package com.company;
 
-
 public class Constants {
     final static String FILE_TYPE_TXT = ".txt";
     final static String FILE_TYPE_JSON = ".json";

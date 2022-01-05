@@ -2,7 +2,7 @@ package com.dbconnectors;
 
 import java.sql.*;
 
-public class DbConnector extends Thread {
+public class DbConnector {
     final static String query = "INSERT INTO audit VALUES(?,?,now(),?,?,?)";
 
     final private static String url = "jdbc:mysql://localhost:3306/elixr_intern_poc_01";
