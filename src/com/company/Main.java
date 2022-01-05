@@ -13,10 +13,11 @@ public class Main {
 
     static DbConnector database = new DbConnector();
     static int count = 0;
-    static String txtFilePath = null;
-    static String searchWord = null;
+
 
     public static void main(String[] args) throws SQLException, InterruptedException {
+         String txtFilePath = null;
+         String searchWord = null;
         System.out.println(Thread.currentThread().getName());
         if (args.length != 2) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_PARAMETERS_NOT_FOUND);
@@ -60,7 +61,7 @@ public class Main {
             database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_COULD_NOT_READ_DATA);
             return;
         }
-        SearchTheWord search = new SearchTheWord(data, count);
+        SearchTheWord search = new SearchTheWord(data, count, searchWord, txtFilePath);
         search.start();
         search.join();
         System.out.println("main exit");

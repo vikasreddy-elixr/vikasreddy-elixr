@@ -8,10 +8,14 @@ import static com.company.Main.*;
 public class SearchTheWord extends Thread {
     String data;
     int count;
+    String searchWord;
+    String txtFilePath;
 
-    public SearchTheWord(String data, int count) {
+    public SearchTheWord(String data, int count, String searchWord, String txtFilePath) {
         this.data = data;
         this.count = count;
+        this.searchWord=searchWord;
+        this.txtFilePath=txtFilePath;
     }
 
     public void run() {
