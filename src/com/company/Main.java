@@ -30,7 +30,7 @@ public class Main {
             database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_WORD_IS_NULL);
             return;
         }
-        if (txtFilePath == null || txtFilePath.equals(" ") || txtFilePath.equals("")) {
+        if (txtFilePath == null || txtFilePath.trim().isEmpty()) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_PATH_IS_NULL);
             database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_PATH_IS_NULL);
             return;
