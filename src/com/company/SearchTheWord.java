@@ -1,22 +1,26 @@
 package com.company;
 
+import com.dbconnectors.DbConnector;
+
 import java.sql.SQLException;
 import java.util.StringTokenizer;
 
 import static com.company.ErrorMessage.SUCCESS_MESSAGE_WORD_FOUND;
-import static com.company.Main.*;
 
 public class SearchTheWord extends Thread {
-    String data;
-    int count;
-    String searchWord;
-    String txtFilePath;
+    private DbConnector database;
+    private String data;
+    private int count;
+    private String searchWord;
+    private String txtFilePath;
 
-    public SearchTheWord(String data, int count, String searchWord, String txtFilePath) {
+
+    public SearchTheWord(String data, int count, String searchWord, String txtFilePath, DbConnector database) {
         this.data = data;
         this.count = count;
         this.searchWord = searchWord;
         this.txtFilePath = txtFilePath;
+        this.database = database;
     }
 
     public void run() {
@@ -39,7 +43,7 @@ public class SearchTheWord extends Thread {
             System.out.println(SUCCESS_MESSAGE_WORD_FOUND);
             System.out.println("The word has been repeated for " + count + " times");
             try {
-                database.databaseConnector(txtFilePath, searchWord, count, "Success", "null");
+                database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_SUCCESS, "null");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

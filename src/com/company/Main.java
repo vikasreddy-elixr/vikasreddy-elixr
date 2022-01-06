@@ -1,5 +1,7 @@
 package com.company;
 
+import com.dbconnectors.DbConnector;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,33 +9,30 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.dbconnectors.DbConnector;
 
 public class Main {
 
-    static DbConnector database = new DbConnector();
     static int count = 0;
-
+    private static DbConnector database = new DbConnector();
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         String txtFilePath = null;
         String searchWord = null;
-        System.out.println(Thread.currentThread().getName());
         if (args.length != 2) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_PARAMETERS_NOT_FOUND);
-            database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_PARAMETERS_NOT_FOUND);
+            database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_PARAMETERS_NOT_FOUND);
             return;
         }
         txtFilePath = args[0];
         searchWord = args[1];
         if (searchWord == null || searchWord.trim().isEmpty()) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_WORD_IS_NULL);
-            database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_WORD_IS_NULL);
+            database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_WORD_IS_NULL);
             return;
         }
         if (txtFilePath == null || txtFilePath.equals(" ") || txtFilePath.equals("")) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_PATH_IS_NULL);
-            database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_PATH_IS_NULL);
+            database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_PATH_IS_NULL);
             return;
         }
 
@@ -42,7 +41,7 @@ public class Main {
         boolean isStringContainsSpecialCharacter = matcher.find();
         if (isStringContainsSpecialCharacter) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_SEARCH_WORD_HAS_SPECIAL_CHARS);
-            database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_SEARCH_WORD_HAS_SPECIAL_CHARS);
+            database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_SEARCH_WORD_HAS_SPECIAL_CHARS);
             return;
         }
 
@@ -50,7 +49,7 @@ public class Main {
 
         if (!file.exists() || !isFileFormatSupported(file) || file.length() == 0) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_FILE_NOT_VALID);
-            database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_FILE_NOT_VALID);
+            database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_FILE_NOT_VALID);
             return;
         }
 
@@ -58,10 +57,10 @@ public class Main {
         String data = readFileAsString(txtFilePath);
         if (data == null) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_COULD_NOT_READ_DATA);
-            database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_COULD_NOT_READ_DATA);
+            database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_COULD_NOT_READ_DATA);
             return;
         }
-        SearchTheWord search = new SearchTheWord(data, count, searchWord, txtFilePath);
+        SearchTheWord search = new SearchTheWord(data, count, searchWord, txtFilePath, database);
         search.start();
         search.join();
         System.out.println("main exit");
