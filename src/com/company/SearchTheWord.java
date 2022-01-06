@@ -15,8 +15,8 @@ public class SearchTheWord extends Thread {
     public SearchTheWord(String data, int count, String searchWord, String txtFilePath) {
         this.data = data;
         this.count = count;
-        this.searchWord=searchWord;
-        this.txtFilePath=txtFilePath;
+        this.searchWord = searchWord;
+        this.txtFilePath = txtFilePath;
     }
 
     public void run() {
@@ -30,7 +30,7 @@ public class SearchTheWord extends Thread {
         if (count == 0) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_WORD_NOT_FOUND);
             try {
-                database.databaseConnector(txtFilePath, searchWord, count, Constants.status, ErrorMessage.ERROR_MESSAGE_WORD_NOT_FOUND);
+                database.databaseConnector(txtFilePath, searchWord, count, Constants.STATUS_FAILURE, ErrorMessage.ERROR_MESSAGE_WORD_NOT_FOUND);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

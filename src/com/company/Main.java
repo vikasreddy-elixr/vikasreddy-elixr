@@ -16,8 +16,8 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-         String txtFilePath = null;
-         String searchWord = null;
+        String txtFilePath = null;
+        String searchWord = null;
         System.out.println(Thread.currentThread().getName());
         if (args.length != 2) {
             System.out.println(ErrorMessage.ERROR_MESSAGE_PARAMETERS_NOT_FOUND);

@@ -5,5 +5,5 @@ public class Constants {
     final static String FILE_TYPE_JSON = ".json";
     final static String SPECIAL_CHAR_REMOVAL_REGEX = "[^a-zA-Z0-9@-]";
     final static String SINGLE_SPACE = " ";
-    static String status = "Failure";
+    static String STATUS_FAILURE = "Failure";
 }
