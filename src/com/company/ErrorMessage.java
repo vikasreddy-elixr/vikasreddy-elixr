@@ -8,4 +8,5 @@ public class ErrorMessage {
     final static String ERROR_MESSAGE_WORD_NOT_FOUND = "Word not found";
     final static String ERROR_MESSAGE_PATH_IS_NULL = "txtFilePath has null value or Empty";
     final static String ERROR_MESSAGE_WORD_IS_NULL = "searchWord has null value or Empty";
+    final static String SUCCESS_MESSAGE_WORD_FOUND = "The word has been found";
 }

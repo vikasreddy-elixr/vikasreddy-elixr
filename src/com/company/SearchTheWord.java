@@ -3,6 +3,7 @@ package com.company;
 import java.sql.SQLException;
 import java.util.StringTokenizer;
 
+import static com.company.ErrorMessage.SUCCESS_MESSAGE_WORD_FOUND;
 import static com.company.Main.*;
 
 public class SearchTheWord extends Thread {
@@ -35,7 +36,7 @@ public class SearchTheWord extends Thread {
             }
 
         } else {
-            System.out.println("The word has been found");
+            System.out.println(SUCCESS_MESSAGE_WORD_FOUND);
             System.out.println("The word has been repeated for " + count + " times");
             try {
                 database.databaseConnector(txtFilePath, searchWord, count, "Success", "null");
