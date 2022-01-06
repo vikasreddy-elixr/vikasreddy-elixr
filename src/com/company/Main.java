@@ -12,10 +12,10 @@ import java.util.regex.Pattern;
 
 public class Main {
 
-    static int count = 0;
     private static DbConnector database = new DbConnector();
 
-    public static void main(String[] args) throws SQLException, InterruptedException {
+    public static void main(String[] args) throws SQLException {
+        int count = 0;
         String txtFilePath = null;
         String searchWord = null;
         if (args.length != 2) {
@@ -62,7 +62,13 @@ public class Main {
         }
         SearchTheWord search = new SearchTheWord(data, count, searchWord, txtFilePath, database);
         search.start();
-        search.join();
+        try {
+            search.join();
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
         System.out.println("main exit");
     }
 
